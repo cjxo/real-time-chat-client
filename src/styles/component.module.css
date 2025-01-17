@@ -115,13 +115,19 @@
   }
 
   h1 {
-    font-size: 40px;
+    font-size: 34px;
     font-weight: 500;
   }
 
   p {
     color: var(--main-text-colour1);
     font-size: 18px;
+  }
+  
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 40px;
+    }
   }
 }
 
@@ -156,5 +162,75 @@ form.authForm {
     display: flex;
     gap: 8px;
     align-items: center;      
+  }
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  
+  img {
+    width: 40px;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    h1 {
+      font-weight: 500;
+      font-size: 20px;
+    }
+  }
+  
+  button {
+    background-color: transparent;
+    border: none;
+  }
+  
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.bottombar {
+  display: flex;
+  gap: 8px;
+  
+  a {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    padding: 8px 0px;
+    border-radius: 8px;
+    align-items: center;
+    
+    transition-timing-function: ease;
+    transition-duration: 200ms;
+    transition-property: background-color gap color;
+    
+    img {
+      flex-shrink: 0;
+      width: 36px;
+    }
+    
+    p {
+      color: var(--main-text-colour0);
+      display: none;
+    }
+    
+    &.active {
+      background-color: var(--main-text-colour0);
+      gap: 16px;
+      p {
+        color: #21262f;
+        display: block;
+      }
+    }
+  }
+  
+  @media (min-width: 768px) {
+    display: none;
   }
 }

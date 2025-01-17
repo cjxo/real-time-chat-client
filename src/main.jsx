@@ -8,6 +8,7 @@ import App from "./App.jsx";
 import Homepage from "./routes/Homepage";
 import Profile from "./routes/Profile";
 import Auth from "./routes/Auth";
+import Explore from "./routes/Explore";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import { AuthProvider } from "./context/Auth";
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
           {
             path: "/profile",
             element: <Profile />
+          },
+          {
+            path: "/explore",
+            element: <Explore />
           },
         ],
       }, 

@@ -1,5 +1,8 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/Auth";
+import styles from "../styles/route.module.css";
+import Topbar from "../components/Topbar";
+import Bottombar from "../components/Bottombar";
 
 const Homepage = () => {
   const auth = useAuth();
@@ -12,7 +15,15 @@ const Homepage = () => {
   }
 
   return (
-    <>Welcome Home</>
+    <section className={styles.homepage}>
+      <Topbar />
+      
+      <section className={styles.epicContent}>
+        <Outlet />
+      </section>
+      
+      <Bottombar />
+    </section>
   );
 };
 
