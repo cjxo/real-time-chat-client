@@ -77,3 +77,13 @@
     outline-offset: 1px;
   }
 }
+
+@media (min-width: 768px) {
+  .input0, .button0 {
+    font-size: 20px;
+  }
+
+  .input0::placeholder {
+    font-size: 16px;
+  }
+}
