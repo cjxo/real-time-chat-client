@@ -6,8 +6,9 @@ import "./index.css";
 import App from "./App.jsx";
 
 import Profile from "./routes/Profile";
-import SignUp from "./routes/SignUp";
-import SignIn from "./routes/SignIn";
+import Auth from "./routes/Auth";
+import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
 
 import {
   createBrowserRouter,
@@ -20,17 +21,25 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        path: "/profile",
+        element: <Profile />
+      },
+      {
         path: "/sign-in",
-        element: <SignIn />,
+        element: (
+          <Auth>
+            <SignIn />
+          </Auth>
+        ),
       },
       {
         path: "/sign-up",
-        element: <SignUp />,
+        element: (
+          <Auth>
+            <SignUp />
+          </Auth>
+        ),
       },
-      {
-        path: "/profile",
-        element: <Profile />
-      }
     ],
   },
 ]);
