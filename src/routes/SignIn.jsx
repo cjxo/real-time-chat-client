@@ -15,22 +15,22 @@ const SignIn = () => {
     <section className={routeStyles.authSection}>
       <form onSubmit={handleSubmit}>
         <div className={routeStyles.inputLabelPair}>
-          <label for="first-name">First Name</label>
+          <label htmlFor="first-name">First Name</label>
           <Input0 type="text" placeholder="Ada" id="first-name" name="first_name" />
         </div>
         
         <div className={routeStyles.inputLabelPair}>
-          <label for="last-name">Last Name</label>
+          <label htmlFor="last-name">Last Name</label>
           <Input0 type="text" placeholder="Lovelace" id="last-name" name="last_name" />
         </div>
         
         <div className={routeStyles.inputLabelPair}>
-          <label for="last">Email</label>
+          <label htmlFor="last">Email</label>
           <Input0 type="email" placeholder="myemail@some-domain.com" id="email" name="email" />
         </div>
         
         <div className={routeStyles.inputLabelPair}>
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
           <Input0
             type={!showPassword ? "password" : "text"}
             placeholder="Your password"
@@ -40,7 +40,7 @@ const SignIn = () => {
         </div>
         
         <div className={routeStyles.inputLabelPair}>
-          <label for="confirm-password">Confirm Password</label>
+          <label htmlFor="confirm-password">Confirm Password</label>
           <Input0
             type={!showPassword ? "password" : "text"}
             placeholder="Confirm password"
@@ -51,7 +51,7 @@ const SignIn = () => {
         
         <div className={routeStyles.showPassword}>
           <CoolCheckbox onChange={() => setShowPassword(!showPassword)} />
-          <label for="show-password">Show Password</label>
+          <label htmlFor="show-password">Show Password</label>
         </div>
 
         <Button0>Submit</Button0>
