@@ -9,6 +9,7 @@ import Profile from "./routes/Profile";
 import Auth from "./routes/Auth";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import { AuthProvider } from "./context/Auth";
 
 import {
   createBrowserRouter,
@@ -18,7 +19,11 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    ),
     children: [
       {
         path: "/profile",
