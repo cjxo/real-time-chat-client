@@ -3,12 +3,40 @@ import CoolCheckbox from "../components/CoolCheckbox";
 import routeStyles from "../styles/route.module.css";
 import { Button0 } from "../components/Button";
 import { Input0 } from "../components/Input";
+import { useAuth } from "../context/Auth";
 
-const SignIn = () => {
+const SignUp = () => {
+  const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  
+  const auth = useAuth();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const fd = new FormData(e.target);
+    const first_name = fd.get("first_name");
+    const last_name = fd.get("last_name");
+    const email = fd.get("email");
+    const password = fd.get("password");
+    const confirm_password = fd.get("confirm_password");
+
+    if (password !== confirm_password) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("Password length must be at least 8");
+      return;
+    }
+    
+    auth
+      .signUp(first_name, last_name, email, password)
+      .then(result => {
+        if (!result.ok) {
+          setError(result.message);
+        }
+      });
   };
   
   return (
@@ -53,9 +81,10 @@ const SignIn = () => {
         <label htmlFor="show-password">Show Password</label>
       </div>
 
+      <div className={`${routeStyles.errorMsg} ${error ? routeStyles.visible : ""}`}>{error}</div>
       <Button0>Submit</Button0>
     </form>
   );
 };
 
-export default SignIn;
+export default SignUp;

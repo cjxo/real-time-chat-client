@@ -38,6 +38,7 @@ const AuthProvider = ({ children }) => {
     if (result.ok) {
       setUser(result.user);
       setIsAuth(true);
+      navigate("/");
     }
 
     setIsLoading(false);
@@ -46,6 +47,9 @@ const AuthProvider = ({ children }) => {
 
   const signUp = async (first_name, last_name, email, password) => {
     const result = await api.auth.signUp(first_name, last_name, email, password);
+    if (result.ok) {
+      navigate("/sign-in");
+    }
     return result;
   };
 
