@@ -5,6 +5,7 @@ import "./index.css";
 // root of all
 import App from "./App.jsx";
 
+import Homepage from "./routes/Homepage";
 import Profile from "./routes/Profile";
 import Auth from "./routes/Auth";
 import SignUp from "./components/SignUp";
@@ -26,9 +27,15 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/profile",
-        element: <Profile />
-      },
+        path: "/",
+        element: <Homepage />,
+        children: [
+          {
+            path: "/profile",
+            element: <Profile />
+          },
+        ],
+      }, 
       {
         path: "/sign-in",
         element: (

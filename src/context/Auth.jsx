@@ -23,11 +23,34 @@ const AuthProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState({});
 
+  const signOut = async () => {
+    const result = await api.auth.signOut();
+    setIsAuth(false)
+    navigate("/sign-in");
+    return result;
+  };
+
   useEffect(() => {
     const checkAuth = async () => {
       const result = await api.auth.isAuth();
-      setIsAuth(result.ok);
       setIsLoading(false);
+      if (result.ok && (result.remainingTime > 0)) {
+        const bufferTime = 10;
+        const reloadTime = (result.remainingTime - bufferTime) * 1000;
+        console.log(result.remainingTime);
+        if (reloadTime > 0) {
+          setUser(result.user);
+          setIsAuth(result.ok);
+
+          const timer = setTimeout(() => {
+            signOut().then(() => navigate("/sign-in"));
+          }, reloadTime);
+
+          return () => clearTimeout(timer);
+        } else {
+          signOut();
+        }
+      }
     };
 
     checkAuth();
@@ -50,13 +73,6 @@ const AuthProvider = ({ children }) => {
     if (result.ok) {
       navigate("/sign-in");
     }
-    return result;
-  };
-
-  const signOut = async () => {
-    const result = await api.auth.signOut();
-    setIsAuth(false)
-    navigate("/sign-in");
     return result;
   };
 
