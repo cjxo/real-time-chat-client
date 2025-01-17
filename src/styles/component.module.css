@@ -87,3 +87,45 @@
     font-size: 16px;
   }
 }
+
+.inputLabelPair {
+  display: flex;
+  flex-direction: column;  
+  gap: 4px;
+
+  label {
+    font-size: 16px;
+  }
+
+  @media (min-width: 768px) {
+    label {
+      font-size: 20px;
+    }
+  }
+}
+
+form.authForm {
+  margin: 0 auto;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .errorMsg {
+    padding: 12px;
+    background-color: #e79085;
+    border-radius: 8px;
+    color: white;
+
+    display: none;
+    &.visible {
+      display: block;
+    }
+  }
+  
+  .showPassword {
+    display: flex;
+    gap: 8px;
+    align-items: center;      
+  }
+}
