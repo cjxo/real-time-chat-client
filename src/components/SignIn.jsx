@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import CoolCheckbox from "./CoolCheckbox";
 import styles from "../styles/component.module.css";
 import { Button0 } from "./Button";
@@ -28,14 +29,14 @@ const SignIn = () => {
   
   return (
     <>
-      <div className={styles.authMessage}>
+      <div className={styles.epilogue}>
         <h1>Sign in to Chat App</h1>
         <p>Welcome back. Good to see you again.</p>
       </div>
       <form className={styles.authForm} onSubmit={handleSubmit}>
         <div className={styles.inputLabelPair}>
           <label htmlFor="last">Email</label>
-          <Input0 type="email" placeholder="myemail@some-domain.com" id="email" name="email" />
+          <Input0 type="email" placeholder="myemail@some-domain.com" id="email" name="email" required />
         </div>
         
         <div className={styles.inputLabelPair}>
@@ -45,6 +46,7 @@ const SignIn = () => {
             placeholder="Your password"
             id="password"
             name="password"
+            required
           />
         </div>
         
@@ -56,6 +58,8 @@ const SignIn = () => {
         <div className={`${styles.errorMsg} ${error ? styles.visible : ""}`}>{error}</div>
         <Button0>Submit</Button0>
       </form>
+      
+      <p className={styles.prologue}>Do not have an account? <Link to="/sign-up">Sign Up</Link></p>
     </>
   );
 };

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import CoolCheckbox from "./CoolCheckbox";
 import styles from "../styles/component.module.css";
 import { Button0 } from "./Button";
@@ -41,24 +42,24 @@ const SignUp = () => {
   
   return (
     <>
-      <div className={styles.authMessage}>
+      <div className={styles.epilogue}>
         <h1>Sign Up to Chat App</h1>
         <p>Just a few things to get started</p>
       </div>
       <form className={styles.authForm} onSubmit={handleSubmit}>
         <div className={styles.inputLabelPair}>
           <label htmlFor="first-name">First Name</label>
-          <Input0 type="text" placeholder="Ada" id="first-name" name="first_name" />
+          <Input0 type="text" placeholder="Ada" id="first-name" name="first_name" required />
         </div>
         
         <div className={styles.inputLabelPair}>
           <label htmlFor="last-name">Last Name</label>
-          <Input0 type="text" placeholder="Lovelace" id="last-name" name="last_name" />
+          <Input0 type="text" placeholder="Lovelace" id="last-name" name="last_name" required />
         </div>
         
         <div className={styles.inputLabelPair}>
           <label htmlFor="last">Email</label>
-          <Input0 type="email" placeholder="myemail@some-domain.com" id="email" name="email" />
+          <Input0 type="email" placeholder="myemail@some-domain.com" id="email" name="email" required />
         </div>
         
         <div className={styles.inputLabelPair}>
@@ -68,6 +69,7 @@ const SignUp = () => {
             placeholder="Your password"
             id="password"
             name="password"
+            required
           />
         </div>
         
@@ -78,6 +80,7 @@ const SignUp = () => {
             placeholder="Confirm password"
             id="confirm-password"
             name="confirm_password"
+            required
           />
         </div>
         
@@ -89,6 +92,8 @@ const SignUp = () => {
         <div className={`${styles.errorMsg} ${error ? styles.visible : ""}`}>{error}</div>
         <Button0>Submit</Button0>
       </form>
+      
+      <p className={styles.prologue}>Already have an account? <Link to="/sign-in">Sign In</Link></p>
     </>
   );
 };
