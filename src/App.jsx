@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { useState } from 'react';
 
+import styles from "./styles/route.module.css";
+
 const App = () => {
   return (
-    <main>
+    <main className={styles.entry}>
       <Outlet />
     </main>
   );

@@ -1,3 +1,9 @@
+.entry {
+  height: 100%;
+  display: flex;
+}
+
 .authSection {
-  
+  flex: 1;
+  align-self: center;
 }

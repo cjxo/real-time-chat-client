@@ -1,8 +1,8 @@
 import { useState } from "react";
-import CoolCheckbox from "../components/CoolCheckbox";
+import CoolCheckbox from "./CoolCheckbox";
 import styles from "../styles/component.module.css";
-import { Button0 } from "../components/Button";
-import { Input0 } from "../components/Input";
+import { Button0 } from "./Button";
+import { Input0 } from "./Input";
 import { useAuth } from "../context/Auth";
 
 const SignUp = () => {
@@ -40,50 +40,56 @@ const SignUp = () => {
   };
   
   return (
-    <form className={styles.authForm} onSubmit={handleSubmit}>
-      <div className={styles.inputLabelPair}>
-        <label htmlFor="first-name">First Name</label>
-        <Input0 type="text" placeholder="Ada" id="first-name" name="first_name" />
+    <>
+      <div className={styles.authMessage}>
+        <h1>Sign Up to Chat App</h1>
+        <p>Just a few things to get started</p>
       </div>
-      
-      <div className={styles.inputLabelPair}>
-        <label htmlFor="last-name">Last Name</label>
-        <Input0 type="text" placeholder="Lovelace" id="last-name" name="last_name" />
-      </div>
-      
-      <div className={styles.inputLabelPair}>
-        <label htmlFor="last">Email</label>
-        <Input0 type="email" placeholder="myemail@some-domain.com" id="email" name="email" />
-      </div>
-      
-      <div className={styles.inputLabelPair}>
-        <label htmlFor="password">Password</label>
-        <Input0
-          type={!showPassword ? "password" : "text"}
-          placeholder="Your password"
-          id="password"
-          name="password"
-        />
-      </div>
-      
-      <div className={styles.inputLabelPair}>
-        <label htmlFor="confirm-password">Confirm Password</label>
-        <Input0
-          type={!showPassword ? "password" : "text"}
-          placeholder="Confirm password"
-          id="confirm-password"
-          name="confirm_password"
-        />
-      </div>
-      
-      <div className={styles.showPassword}>
-        <CoolCheckbox onChange={() => setShowPassword(!showPassword)} />
-        <label htmlFor="show-password">Show Password</label>
-      </div>
+      <form className={styles.authForm} onSubmit={handleSubmit}>
+        <div className={styles.inputLabelPair}>
+          <label htmlFor="first-name">First Name</label>
+          <Input0 type="text" placeholder="Ada" id="first-name" name="first_name" />
+        </div>
+        
+        <div className={styles.inputLabelPair}>
+          <label htmlFor="last-name">Last Name</label>
+          <Input0 type="text" placeholder="Lovelace" id="last-name" name="last_name" />
+        </div>
+        
+        <div className={styles.inputLabelPair}>
+          <label htmlFor="last">Email</label>
+          <Input0 type="email" placeholder="myemail@some-domain.com" id="email" name="email" />
+        </div>
+        
+        <div className={styles.inputLabelPair}>
+          <label htmlFor="password">Password</label>
+          <Input0
+            type={!showPassword ? "password" : "text"}
+            placeholder="Your password"
+            id="password"
+            name="password"
+          />
+        </div>
+        
+        <div className={styles.inputLabelPair}>
+          <label htmlFor="confirm-password">Confirm Password</label>
+          <Input0
+            type={!showPassword ? "password" : "text"}
+            placeholder="Confirm password"
+            id="confirm-password"
+            name="confirm_password"
+          />
+        </div>
+        
+        <div className={styles.showPassword}>
+          <CoolCheckbox onChange={() => setShowPassword(!showPassword)} />
+          <label htmlFor="show-password">Show Password</label>
+        </div>
 
-      <div className={`${styles.errorMsg} ${error ? styles.visible : ""}`}>{error}</div>
-      <Button0>Submit</Button0>
-    </form>
+        <div className={`${styles.errorMsg} ${error ? styles.visible : ""}`}>{error}</div>
+        <Button0>Submit</Button0>
+      </form>
+    </>
   );
 };
 

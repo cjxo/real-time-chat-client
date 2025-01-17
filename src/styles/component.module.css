@@ -104,6 +104,27 @@
   }
 }
 
+.authMessage {
+  margin: 0 auto;
+  margin-bottom: 16px;
+  max-width: 500px;
+
+  img {
+    width: 64px;
+    height: 64px;
+  }
+
+  h1 {
+    font-size: 40px;
+    font-weight: 500;
+  }
+
+  p {
+    color: var(--main-text-colour1);
+    font-size: 18px;
+  }
+}
+
 form.authForm {
   margin: 0 auto;
   max-width: 500px;
