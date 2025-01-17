@@ -1,6 +1,8 @@
 import { useState } from "react";
 import CoolCheckbox from "../components/CoolCheckbox";
 import routeStyles from "../styles/route.module.css";
+import { Button0 } from "../components/Button";
+import { Input0 } from "../components/Input";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,22 +16,22 @@ const SignIn = () => {
       <form onSubmit={handleSubmit}>
         <div className={routeStyles.inputLabelPair}>
           <label for="first-name">First Name</label>
-          <input type="text" placeholder="Ada" id="first-name" name="first_name" />
+          <Input0 type="text" placeholder="Ada" id="first-name" name="first_name" />
         </div>
         
         <div className={routeStyles.inputLabelPair}>
           <label for="last-name">Last Name</label>
-          <input type="text" placeholder="Lovelace" id="last-name" name="last_name" />
+          <Input0 type="text" placeholder="Lovelace" id="last-name" name="last_name" />
         </div>
         
         <div className={routeStyles.inputLabelPair}>
           <label for="last">Email</label>
-          <input type="email" placeholder="myemail@some-domain.com" id="email" name="email" />
+          <Input0 type="email" placeholder="myemail@some-domain.com" id="email" name="email" />
         </div>
         
         <div className={routeStyles.inputLabelPair}>
           <label for="password">Password</label>
-          <input
+          <Input0
             type={!showPassword ? "password" : "text"}
             placeholder="Your password"
             id="password"
@@ -39,7 +41,7 @@ const SignIn = () => {
         
         <div className={routeStyles.inputLabelPair}>
           <label for="confirm-password">Confirm Password</label>
-          <input
+          <Input0
             type={!showPassword ? "password" : "text"}
             placeholder="Confirm password"
             id="confirm-password"
@@ -51,8 +53,8 @@ const SignIn = () => {
           <CoolCheckbox onChange={() => setShowPassword(!showPassword)} />
           <label for="show-password">Show Password</label>
         </div>
-        
-        <button className={routeStyles.submit}>Submit</button>
+
+        <Button0>Submit</Button0>
       </form>
     </section>
   );

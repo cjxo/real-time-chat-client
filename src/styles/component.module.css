@@ -38,3 +38,42 @@
     }
   }
 }
+
+.button0 {
+  font-size: 16px;
+  padding: 12px;
+  border: 1px solid #9d8f5d;
+  background-color: var(--main-text-colour0);
+  color: var(--main-bg-colour0);
+  border-radius: 8px;
+  
+  transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+  transition-duration: 200ms;
+  transition-property: color background-color;
+  
+  &:hover {
+    background-color: transparent;
+    color: var(--main-text-colour0)
+  }
+}
+
+.input0 {
+  font-size: 16px;
+  padding: 12px;
+  border: 1px solid var(--main-text-colour3);
+  background-color: transparent;
+  border-radius: 8px;
+  transition-timing-function: ease;
+  transition-duration: 150ms;
+  transition-property: outline outline-offset;
+  
+  &::placeholder {
+    color: var(--main-text-colour2);
+    font-size: 14px;
+  }
+  
+  &:focus, &:active {
+    outline: 2px solid var(--main-text-colour1);
+    outline-offset: 1px;
+  }
+}
