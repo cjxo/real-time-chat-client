@@ -17,4 +17,8 @@
     overflow-y: auto;
     flex-grow: 1;
   }
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 }

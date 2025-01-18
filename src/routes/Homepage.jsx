@@ -2,6 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/Auth";
 import styles from "../styles/route.module.css";
 import Topbar from "../components/Topbar";
+import Sidebar from "../components/Sidebar";
 import Bottombar from "../components/Bottombar";
 
 const Homepage = () => {
@@ -17,6 +18,7 @@ const Homepage = () => {
   return (
     <section className={styles.homepage}>
       <Topbar />
+      <Sidebar />
       
       <section className={styles.epicContent}>
         <Outlet />

@@ -23,26 +23,27 @@ const Bottombar = () => {
       name: "Profile",
       route: "/profile",
     },
-  ]
+  ];
   return (
-    <div className={styles.bottombar}>
+    <ul className={styles.bottombar}>
       {links.map(({ active, inactive, name, route }) => {
         const isActive = route === location.pathname;
         return (
-          <Link
-            key={name}
-            to={route}
-            className={isActive ? styles.active : ""}
-          >
-            <img
-              src={isActive ? active : inactive}
-              alt={`${name} icon`}
-            />
-            <p>{name}</p>
-          </Link>
+          <li key={name}>
+            <Link
+              to={route}
+              className={isActive ? styles.active : ""}
+            >
+              <img
+                src={isActive ? active : inactive}
+                alt={`${name} icon`}
+              />
+              <p>{name}</p>
+            </Link>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };
 

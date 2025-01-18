@@ -42,7 +42,7 @@ const SignUp = () => {
   
   return (
     <>
-      <div className={styles.epilogue}>
+      <div className={styles.prologue}>
         <h1>Sign Up to Chat App</h1>
         <p>Just a few things to get started</p>
       </div>
@@ -93,7 +93,7 @@ const SignUp = () => {
         <Button0>Submit</Button0>
       </form>
       
-      <p className={styles.prologue}>Already have an account? <Link to="/sign-in">Sign In</Link></p>
+      <p className={styles.epilogue}>Already have an account? <Link to="/sign-in">Sign In</Link></p>
     </>
   );
 };

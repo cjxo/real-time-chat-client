@@ -57,6 +57,11 @@
   }
 }
 
+.button1 {
+  background-color: transparent;
+  border: none;
+}
+
 .input0 {
   font-size: 16px;
   padding: 12px;
@@ -131,7 +136,7 @@
   }
 }
 
-.prologue {
+.epilogue {
   margin-top: 32px;
   
   a {
@@ -198,17 +203,22 @@ form.authForm {
   display: flex;
   gap: 8px;
   
-  a {
+  li {
     flex-grow: 1;
+  }
+  
+  a {
     display: flex;
     justify-content: center;
     padding: 8px 0px;
     border-radius: 8px;
     align-items: center;
     
-    transition-timing-function: ease;
-    transition-duration: 200ms;
-    transition-property: background-color gap color;
+    &, p {
+      transition-timing-function: ease;
+      transition-duration: 400ms;
+      transition-property: background-color gap color;
+    }
     
     img {
       flex-shrink: 0;
@@ -232,5 +242,85 @@ form.authForm {
   
   @media (min-width: 768px) {
     display: none;
+  }
+}
+
+.sidebar {
+  display: none;
+  padding: 0px 16px;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    
+    img {
+      width: 48px;
+    }
+    
+    h1 {
+      font-weight: 500;
+      font-size: 28px;
+    }
+  }
+  
+  a, button {
+    p {
+      color: var(--main-text-colour0);
+      font-size: 16px;
+    }
+    
+    img {
+      width: 30px;
+    }
+  }
+  
+  .linkedList {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  a, button {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 8px;
+    gap: 12px;
+    
+    &, p {
+      transition-timing-function: ease;
+      transition-duration: 400ms;
+      transition-property: background-color gap color;
+    }
+          
+    &.active, &:hover {
+      background-color: var(--main-text-colour0);
+      gap: 24px;
+      
+      p {
+        font-size: 18px;
+        color: var(--main-bg-colour0);
+      }
+    }
+  }
+  
+  button {
+    margin-top: auto;
+    width: 100%;
+    
+    &:hover {
+      background-color: #dc7b65;
+      
+      p {
+        color: var(--main-text-colour0);
+      }
+    }
+  }
+  
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
   }
 }
