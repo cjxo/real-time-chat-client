@@ -7,8 +7,14 @@ const Input0 = ({ className, ...rest }) => {
   );
 };
 
-export { Input0 };
+const TextArea0 = ({ children, className, ...rest }) => {
+  return (
+    <textarea className={`${styles.input0} ${className}`} {...rest}>{children}</textarea>
+  );
+};
 
-Input0.propTypes = {
+export { Input0, TextArea0 };
+
+Input0.propTypes = TextArea0.propTypes = {
   className: PropTypes.string,
 };

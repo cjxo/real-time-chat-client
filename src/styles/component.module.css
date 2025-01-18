@@ -173,6 +173,7 @@ form.authForm {
 .topbar {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 8px;
   
   img {
     width: 40px;
@@ -202,6 +203,9 @@ form.authForm {
 .bottombar {
   display: flex;
   gap: 8px;
+  background-color: var(--main-bg-colour1);
+  border-radius: 16px;
+  padding: 12px;
   
   li {
     flex-grow: 1;
@@ -247,7 +251,9 @@ form.authForm {
 
 .sidebar {
   display: none;
-  padding: 0px 16px;
+  padding: 32px;
+  background-color: var(--main-bg-colour1);
+  border-radius: 16px;
 
   .logo {
     display: flex;

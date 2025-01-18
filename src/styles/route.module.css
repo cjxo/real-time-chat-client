@@ -12,6 +12,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  gap: 12px;
   
   .epicContent {
     overflow-y: auto;
@@ -20,5 +21,78 @@
   
   @media (min-width: 768px) {
     flex-direction: row;
+  }
+}
+
+.profile {
+  background-color: var(--main-bg-colour1);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 16px;
+  
+  .title {
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  .profilePicture {
+    display: flex;
+    justify-content: center;
+    img.pic {
+      border: 2px solid white;
+      width: 96px;
+      border-radius: 50%;
+      
+      @media (min-width: 768px) {
+        width: 128px;
+      }
+    }
+  }
+  
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    .labelInputPair {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      
+      div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        img {
+          width: 24px;
+        }
+        label {
+          color: #b0a3b7;
+        }
+      }
+      
+      input, textarea {
+        background-color: var(--main-bg-colour0);
+      }
+    }
+  }
+  
+  .divider {
+    border: 1px solid var(--main-bg-colour0);
+  }
+  
+  .moreDetails {
+    li {
+      display: flex;
+      justify-content: space-between;
+      p:last-child {
+        color: var(--main-text-colour2);
+      }
+    }
+  }
+  
+  @media (min-width: 768px) {
+    padding: 36px;
   }
 }

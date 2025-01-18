@@ -17,6 +17,7 @@
   -moz-osx-font-smoothing: grayscale;
   
   --main-bg-colour0: #21262f;
+  --main-bg-colour1: #181c29;
   
   --main-text-colour0: #efd09e;
   --main-text-colour1: #cfbe9a;
@@ -46,10 +47,14 @@ h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
-button, input {
+button, input, textarea {
   font-family: inherit;
   box-sizing: border-box;
   color: var(--main-text-colour0);
+}
+
+textarea {
+  resize: none;
 }
 
 button {
