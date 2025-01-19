@@ -39,9 +39,15 @@
   
   .profilePicture {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    
+    p {
+      font-size: 20px;
+    }
+    
     img.pic {
-      
       border: 2px solid rgba(255,255,255,0);
       outline: 4px solid rgba(255,255,255,255);
       outline-offset: 4px;
@@ -76,7 +82,6 @@
         div {
           margin-left: auto;
         }
-
       }
       
       input, textarea {

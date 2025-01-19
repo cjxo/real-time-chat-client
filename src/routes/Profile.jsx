@@ -3,11 +3,13 @@ import styles from "../styles/route.module.css";
 import { Input0, TextArea0 } from "../components/Input"
 import { Button1 } from "../components/Button"
 import { useAuth } from "../context/Auth";
+import Loader from "../components/Loader";
 
 const Profile = () => {
   const auth = useAuth();
   const inputRef = useRef({});
   const [editingField, setEditingField] = useState("");
+  const [isUpdatingField, setIsUpdatingField] = useState(false);
   const user = auth.user;
   const date = new Date(user.joined_date).toLocaleDateString(undefined, {
     year: "numeric",
@@ -60,13 +62,24 @@ const Profile = () => {
         // actually change the field
         const opts = {};
         opts[field] = currRef.value;
-        auth.updateUser(opts);
+        setIsUpdatingField(true);
+        auth
+          .update(opts)
+          .then(result => {
+            setEditingField("");
+            setIsUpdatingField(false);
+          });
       } else {
+        setEditingField("");
         // no need change, since theyre equal. That is, ignore.
       }
       
-      setEditingField("");
     } else {
+      if (editingField) {
+        const currRef = inputRef.current[editingField];
+        currRef.value = user[editingField];
+      }
+      
       setEditingField(field);
     }
   };
@@ -79,13 +92,14 @@ const Profile = () => {
   
   return (
     <div className={styles.profile}>
-      <h2 className={styles.title}>Profile | {user.first_name + " " + user.last_name}</h2>
+      <h2 className={styles.title}>Profile</h2>
       <div className={styles.profilePicture}>
         <img
           src="./icons/profile-placeholder-svgrepo-com.svg"
           alt="profile picture"
           className={styles.pic}
         />
+        <p>{user.first_name + " " + user.last_name}</p>
       </div>
       
       <div className={styles.details}>
@@ -99,27 +113,41 @@ const Profile = () => {
               <label htmlFor={field}>{label}</label>
               <div>
                 {(editingField === field) ? (
+                  isUpdatingField ? <Loader /> : (
+                    <>
+                      <Button1
+                        type="button"
+                        onClick={handleCancelEditField}
+                      >
+                        <img
+                          src="./icons/cancel-svgrepo-com.svg"
+                          alt="cancel edit field"
+                        />
+                      </Button1>
+                      <Button1
+                        type="button"
+                        onClick={() => handleEditField(field)}
+                        disabled={isUpdatingField}
+                      >
+                        <img
+                          src="./icons/done-all-round-svgrepo-com.svg"
+                          alt="edit field"
+                        />
+                      </Button1>
+                    </>
+                  )
+                ) : (
                   <Button1
                     type="button"
-                    onClick={handleCancelEditField}
+                    onClick={() => handleEditField(field)}
+                    disabled={isUpdatingField}
                   >
                     <img
-                      src="./icons/cancel-svgrepo-com.svg"
-                      alt="cancel edit field"
+                      src="./icons/edit-3-svgrepo-com.svg"
+                      alt="edit field"
                     />
                   </Button1>
-                ) : (
-                  null
                 )}
-                <Button1
-                  type="button"
-                  onClick={() => handleEditField(field)}
-                >
-                  <img
-                    src={(editingField === field) ? "./icons/done-all-round-svgrepo-com.svg" : "./icons/edit-3-svgrepo-com.svg"}
-                    alt="edit field"
-                  />
-                </Button1>
               </div>
             </div>
             {type === "textarea" ? (

@@ -35,4 +35,7 @@ export default {
     isAuth: async () => await fetch2("auth/is-auth", "GET"),
     signOut: async () => await fetch2("auth/sign-out", "POST"),
   },
+  user: {
+    update: async (opts) => await fetch2("user/update", "POST", opts),
+  },
 };

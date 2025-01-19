@@ -330,3 +330,17 @@ form.authForm {
     flex-direction: column;
   }
 }
+
+.loader {
+  border: 2px solid #AAAAAA;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

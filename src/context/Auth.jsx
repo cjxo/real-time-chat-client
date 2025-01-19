@@ -15,6 +15,9 @@ const AuthContext = createContext({
   signOut: async () => {
     return { ok: false, message: "" };
   },
+  update: async (opts) => {
+    return { ok: false, message: "" };
+  },
 });
 
 const AuthProvider = ({ children }) => {
@@ -75,9 +78,18 @@ const AuthProvider = ({ children }) => {
     }
     return result;
   };
+  
+  const update = async (opts) => {
+    const result = await api.user.update(opts);
+    if (result.ok) {
+      setUser(result.user);
+    }
+    
+    return result;
+  };
 
   return (
-    <AuthContext.Provider value={{ isLoading, isAuth, user, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ isLoading, isAuth, user, signIn, signUp, signOut, update }}>
       {children}
     </AuthContext.Provider>
   );
