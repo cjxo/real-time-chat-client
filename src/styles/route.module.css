@@ -17,6 +17,14 @@
   .epicContent {
     overflow-y: auto;
     flex-grow: 1;
+
+    background-color: var(--main-bg-colour1);
+    border-radius: 16px;
+    padding: 20px 16px;
+   
+    @media (min-width: 768px) {
+      padding: 36px;
+    }
   }
   
   @media (min-width: 768px) {
@@ -24,13 +32,10 @@
   }
 }
 
-.profile {
-  background-color: var(--main-bg-colour1);
-  border-radius: 16px;
+.profile { 
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 20px 16px;
   
   .title {
     font-weight: 500;
@@ -106,9 +111,5 @@
         color: var(--main-text-colour2);
       }
     }
-  }
-  
-  @media (min-width: 768px) {
-    padding: 36px;
-  }
+  } 
 }
