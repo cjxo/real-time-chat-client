@@ -37,5 +37,10 @@ export default {
   },
   user: {
     update: async (opts) => await fetch2("user/update", "POST", opts),
+    getAll: async () => await fetch2("user/users", "GET"),
+    add: async (id) => await fetch2(`user/add/${id}`, "POST"),
+  },
+  message: {
+    getAll: async () => await fetch2("message/messages", "GET"),
   },
 };

@@ -9,6 +9,7 @@ import Homepage from "./routes/Homepage";
 import Profile from "./routes/Profile";
 import Auth from "./routes/Auth";
 import Home from "./routes/Home";
+import Messaging from "./routes/Messaging";
 import Explore from "./routes/Explore";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
           {
             path: "/explore",
             element: <Explore />
+          },
+          {
+            path: "/message/:id",
+            element: <Messaging />,
           },
         ],
       }, 
