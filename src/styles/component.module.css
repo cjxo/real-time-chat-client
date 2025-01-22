@@ -363,3 +363,82 @@ form.authForm {
     width: 100%;
   }
 }
+
+.messagingHeader {
+  display: flex;
+  align-items: center;
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    img {
+      width: 48px;
+    }
+    
+    .name {
+      font-weight: 500;
+      font-size: 20px;
+    }
+  }
+  
+  .right {
+    margin-left: auto;
+    img {
+      width: 24px;
+    }
+  }
+}
+
+.messagingInput {
+  display: flex;
+  gap: 16px;
+  
+  input {
+    flex-grow: 1;
+  }
+  
+  button img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.messagingList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  li {
+    display: flex;
+    gap: 8px;
+    
+    &.right {
+      flex-direction: row-reverse;
+      justify-content: end;
+    }
+    
+    &.left {
+    }
+    
+    .left {
+      margin-top: auto;
+    }
+    
+    .right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      p.msg {
+        background-color: var(--main-bg-colour2);
+        padding: 12px;
+        border-radius: 8px;
+        overflow-wrap: break-word;
+        inline-size: 150px;
+      }
+    }
+    
+    img {
+      width: 48px;
+    }
+  }
+}

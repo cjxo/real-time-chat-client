@@ -11,7 +11,6 @@ const Home = () => {
     api.message.getAll().then(result => {
       if (result.ok) {
         setMessages(result.messages);
-        console.log(result.messages);
       } else {
         console.error(result.message);
       }
@@ -24,8 +23,9 @@ const Home = () => {
       <Searchbar />
       <ul>
         {messages.map(message => {
+          console.log(message)
           return <li key={message.user.id}>
-            <Link to={`message/${message.user.id}`}>
+            <Link to={`message/${message.user.id}`} state={message}>
               <div className={styles.left}>
                 <img
                   src="./icons/profile-circle-svgrepo-com.svg"
