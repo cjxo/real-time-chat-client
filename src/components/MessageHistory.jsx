@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useAuth } from "../context/Auth";
 import { useResize } from "../context/Resize";
 import styles from "../styles/component.module.css";
@@ -5,11 +6,20 @@ import routeStyles from "../styles/route.module.css";
 const MessageHistory = ({ reciever, messages }) => {
   const { user } = useAuth();
   const { msgListHeight } = useResize();
+  const listRef = useRef();
+  
+  //https://stackoverflow.com/questions/11715646/scroll-automatically-to-the-bottom-of-the-page
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTop = listRef.current.scrollHeight;
+    }
+  }, [msgListHeight]);
   
   return (
     <ul
       className={styles.messagingList}
       style={{ maxHeight: msgListHeight }}
+      ref={listRef}
     >
       {messages.map(message => {
         const date = new Date(message.time_sent).toLocaleDateString(undefined, {

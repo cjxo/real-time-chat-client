@@ -21,7 +21,7 @@ const ResizeProvider = ({ children }) => {
         const topBar = document.querySelector(`.${compStyles.topbar}`);
         const bottomBar = document.querySelector(`.${compStyles.bottombar}`);
         if ((root && topBar && bottomBar)) {
-          const maxHeight = window.innerHeight - bottomBar.offsetHeight - topBar.offsetHeight - 20 - 20;
+          const maxHeight = window.innerHeight - bottomBar.offsetHeight - topBar.offsetHeight - 20 - 20 - 12 - 12;
           setEpicContentHeight(maxHeight + "px");
         }
       } else if (document.querySelector(`.${compStyles.sidebar}`)){
@@ -36,10 +36,9 @@ const ResizeProvider = ({ children }) => {
       if (messagingHeader && messagingInput && epicContent) {
         if (window.innerWidth >= 768) {
           const maxHeight = epicContent.offsetHeight - messagingHeader.offsetHeight - messagingInput.offsetHeight - 20 - 20 - 12 - 12 - 12 - 12;
-          console.log(maxHeight);
           setMsgListHeight(maxHeight + "px");
         } else {
-          const maxHeight = parseInt(epicContent.style.maxHeight) - messagingHeader.offsetHeight - messagingInput.offsetHeight - 8 - 8 - 20 - 20 - 12 - 12;
+          const maxHeight = parseInt(epicContent.style.maxHeight) - messagingHeader.offsetHeight - messagingInput.offsetHeight - 8 - 8 - 20 - 20;
           setMsgListHeight(maxHeight + "px");
         }
       }
