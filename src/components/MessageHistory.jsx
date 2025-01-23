@@ -13,7 +13,7 @@ const MessageHistory = ({ reciever, messages }) => {
     if (listRef.current) {
       listRef.current.scrollTop = listRef.current.scrollHeight;
     }
-  }, [msgListHeight]);
+  }, [msgListHeight, messages.length]);
   
   return (
     <ul
