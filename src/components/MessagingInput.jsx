@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Input0 } from "./Input";
+import Loader from "./Loader";
 import { Button1 } from "./Button";
 import styles from "../styles/component.module.css";
 
@@ -22,7 +23,7 @@ const MessagingInput = ({ user, addNewMessage }) => {
       if (result.ok) {
         addNewMessage(result.newMessage);
       } else {
-        
+        console.error(result.message);        
       }
     });
   };
@@ -40,10 +41,14 @@ const MessagingInput = ({ user, addNewMessage }) => {
         onChange={e => setText(e.target.value)}
       />
       <Button1 disabled={isSending || !!!text}>
-        <img
-          src={!!text ? "./icons/send-2-svgrepo-com.svg" : "./icons/send-2-disabled-svgrepo-com.svg"}
-          alt="send message"
-        />
+        {isSending ? (
+          <Loader />
+        ) : (
+          <img
+            src={!!text ? "./icons/send-2-svgrepo-com.svg" : "./icons/send-2-disabled-svgrepo-com.svg"}
+            alt="send message"
+          />
+        )}
       </Button1>
     </form>
   );
