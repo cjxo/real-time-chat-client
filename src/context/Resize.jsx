@@ -21,7 +21,7 @@ const ResizeProvider = ({ children }) => {
         const topBar = document.querySelector(`.${compStyles.topbar}`);
         const bottomBar = document.querySelector(`.${compStyles.bottombar}`);
         if ((root && topBar && bottomBar)) {
-          const maxHeight = window.innerHeight - 40 - 12 - 12 - 36 - 16 - 16 - 12 - 12;
+          const maxHeight = window.innerHeight - bottomBar.offsetHeight - topBar.offsetHeight - 20 - 20;
           setEpicContentHeight(maxHeight + "px");
         }
       } else if (document.querySelector(`.${compStyles.sidebar}`)){
@@ -30,23 +30,16 @@ const ResizeProvider = ({ children }) => {
     };
     
     const updateMsgListHeight = () => {
-      const root = document.querySelector("#root");
+      const epicContent = document.querySelector(`.${routeStyles.epicContent}`);
       const messagingHeader = document.querySelector(`.${compStyles.messagingHeader}`);
       const messagingInput = document.querySelector(`.${compStyles.messagingInput}`);
-      const topBar = document.querySelector(`.${compStyles.topbar}`);
-      const bottomBar = document.querySelector(`.${compStyles.bottombar}`);
-      if (messagingHeader && messagingInput && topBar && bottomBar) {
+      if (messagingHeader && messagingInput && epicContent) {
         if (window.innerWidth >= 768) {
-          // the number 48is the size of the image to be loaded, because I think that this line 
-          // right here is executed EVEN IF THE IMAGE HASNT LOADED YET. So the offsetHeight are lower.
-          // The other numbers are just paddings and gaps of the containers.
-          const maxHeight = window.innerHeight - 48 - messagingInput.offsetHeight - 36 - 36 - 16 - 16 - 8 - 8;
+          const maxHeight = epicContent.offsetHeight - messagingHeader.offsetHeight - messagingInput.offsetHeight - 20 - 20 - 12 - 12 - 12 - 12;
+          console.log(maxHeight);
           setMsgListHeight(maxHeight + "px");
         } else {
-          // the 48 here are the size of the images to be loaded, because I think that this line 
-          // right here is executed EVEN IF THE IMAGE HASNT LOADED YET. So the offsetHeights are lower.
-          // The other numbers are just paddings and gaps of the containers.
-          const maxHeight = window.innerHeight - messagingHeader.offsetHeight - topBar.offsetHeight - bottomBar.offsetHeight - 48 - messagingInput.offsetHeight - 16 - 16 - 12 - 12 - 20 - 20 - 8 - 8;
+          const maxHeight = parseInt(epicContent.style.maxHeight) - messagingHeader.offsetHeight - messagingInput.offsetHeight - 8 - 8 - 20 - 20 - 12 - 12;
           setMsgListHeight(maxHeight + "px");
         }
       }
@@ -62,6 +55,7 @@ const ResizeProvider = ({ children }) => {
     observer.observe(document.body, {
       subtree: true,
       childList: true,
+      attributes: true,
     });
 
     window.addEventListener('resize', update);
