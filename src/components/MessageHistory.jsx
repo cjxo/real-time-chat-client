@@ -1,10 +1,16 @@
 import { useAuth } from "../context/Auth";
+import { useResize } from "../context/Resize";
 import styles from "../styles/component.module.css";
+import routeStyles from "../styles/route.module.css";
 const MessageHistory = ({ reciever, messages }) => {
   const { user } = useAuth();
+  const { msgListHeight } = useResize();
   
   return (
-    <ul className={styles.messagingList}>
+    <ul
+      className={styles.messagingList}
+      style={{ maxHeight: msgListHeight }}
+    >
       {messages.map(message => {
         const date = new Date(message.time_sent).toLocaleDateString(undefined, {
           year: "numeric",

@@ -14,6 +14,7 @@ import Explore from "./routes/Explore";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import { AuthProvider } from "./context/Auth";
+import { ResizeProvider } from "./context/Resize";
 
 import {
   createBrowserRouter,
@@ -73,6 +74,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ResizeProvider>
+      <RouterProvider router={router} />
+    </ResizeProvider>
   </StrictMode>,
 );

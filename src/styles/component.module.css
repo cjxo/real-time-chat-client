@@ -173,7 +173,6 @@ form.authForm {
 .topbar {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 8px;
   
   img {
     width: 40px;
@@ -408,6 +407,8 @@ form.authForm {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  
+  overflow-y: auto;
   li {
     display: flex;
     gap: 8px;
