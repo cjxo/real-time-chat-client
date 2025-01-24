@@ -45,4 +45,5 @@ export default {
     send: async (recipientId, message) => await fetch2(`message/send/${recipientId}`, "POST", { message }),
     get: async (recipientId) => await fetch2(`message/messages/${recipientId}`, "GET"),
   },
+  getUrl,
 };

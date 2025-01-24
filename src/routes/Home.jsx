@@ -23,9 +23,8 @@ const Home = () => {
       <Searchbar />
       <ul>
         {messages.map(message => {
-          console.log(message)
           return <li key={message.user.id}>
-            <Link to={`message/${message.user.id}`} state={message}>
+            <Link to={`message/${message.user.id}`}>
               <div className={styles.left}>
                 <img
                   src="./icons/profile-circle-svgrepo-com.svg"

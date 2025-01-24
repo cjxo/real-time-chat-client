@@ -21,6 +21,13 @@
     background-color: var(--main-bg-colour1);
     border-radius: 16px;
     padding: 20px 16px;
+    
+    display: flex;
+    gap: 12px;
+    
+    > * {
+      flex-grow: 1;
+    }
    
     @media (min-width: 768px) {
       padding: 36px;

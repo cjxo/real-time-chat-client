@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, createContext, useContext } from "react";
 import api from "../lib/api";
+import { io } from "socket.io-client";
 
 const AuthContext = createContext({
   isLoading: true,
@@ -25,13 +26,8 @@ const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState({});
-
-  const signOut = async () => {
-    const result = await api.auth.signOut();
-    setIsAuth(false)
-    navigate("/sign-in");
-    return result;
-  };
+  const [socket, setSocket] = useState(null);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -44,6 +40,7 @@ const AuthProvider = ({ children }) => {
         if (reloadTime > 0) {
           setUser(result.user);
           setIsAuth(result.ok);
+          sockIoConnect(result.user.id);
 
           const timer = setTimeout(() => {
             signOut().then(() => navigate("/sign-in"));
@@ -59,17 +56,59 @@ const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
+  const sockIoConnect = (userId) => {
+    if (!socket) {
+      const newSocket = io(api.getUrl(""), {
+        query: {
+          userId
+        },
+      });
+      newSocket.connect();
+      setSocket(newSocket);
+    }
+  };
+
+  const sockIoDisconnect = () => {
+    if (socket?.connected) {
+      socket.disconnect();
+    }
+  };
+
+  const subscribeToMessage = (toUserId) => {
+    if (socket?.connected) {
+      socket.on("new message", (message) => {
+        console.log(message);
+        setMessages((prevMessage) => [...prevMessage, message]);
+      });
+    }
+  };
+
+  const unsubscribeToMessage = (toUserId) => {
+    if (socket?.connected) {
+      socket.off("new message");
+    }
+  };
+
   const signIn = async (email, password) => {
     const result = await api.auth.signIn(email, password);
     if (result.ok) {
       setUser(result.user);
       setIsAuth(true);
-      navigate("/");
+      sockIoConnect(result.user.id);
+      navigate("/"); 
     }
 
     setIsLoading(false);
     return result;
   };
+
+  const signOut = async () => {
+    const result = await api.auth.signOut();
+    setIsAuth(false)
+    navigate("/sign-in");
+    sockIoDisconnect();
+    return result;
+  }; 
 
   const signUp = async (first_name, last_name, email, password) => {
     const result = await api.auth.signUp(first_name, last_name, email, password);
@@ -89,7 +128,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoading, isAuth, user, signIn, signUp, signOut, update }}>
+    <AuthContext.Provider value={{ isLoading, isAuth, user, signIn, signUp, signOut, update, socket, subscribeToMessage, unsubscribeToMessage  }}>
       {children}
     </AuthContext.Provider>
   );
