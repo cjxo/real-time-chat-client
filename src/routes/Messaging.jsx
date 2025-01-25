@@ -4,6 +4,7 @@ import styles from "../styles/route.module.css";
 import MessagingHeader from "../components/MessagingHeader";
 import MessageHistory from "../components/MessageHistory";
 import MessagingInput from "../components/MessagingInput";
+import Loader from "../components/Loader";
 
 import api from "../lib/api";
 import { useAuth } from "../context/Auth";
@@ -11,21 +12,21 @@ import { useAuth } from "../context/Auth";
 const Messaging = () => {
   const location = useLocation();
   const [messageState, setMessageState] = useState({user: {}, messages:[]});
+  const [isLoading, setIsLoading] = useState(true);
+  const { socket, subscribeToMessage, unsubscribeToMessage } = useAuth();
   const messages = messageState.messages;
   const user = messageState.user;
-  const { socket, subscribeToMessage, unsubscribeToMessage } = useAuth();
   const userId = location.state;
 
   useEffect(() => {
     api.message.get(userId).then(result => {
       if (result.ok) {
-        console.log(result.theMessage);
         setMessageState(result.theMessage)
-        console.log(result.theMessage)
         subscribeToMessage(userId);
       } else {
         console.error(result.message);
       }
+      setIsLoading(false);
     });
 
     return () => unsubscribeToMessage(userId)
@@ -38,12 +39,18 @@ const Messaging = () => {
   
   return (
     <section className={styles.messaging}>
-      <MessagingHeader user={user} />
-      <MessageHistory reciever={user} messages={messages} />
-      <MessagingInput
-        user={user}
-        addNewMessage={handleAddNewMessage}
-      />
+      {!isLoading ? (
+        <>
+          <MessagingHeader user={user} />
+          <MessageHistory reciever={user} messages={messages} />
+          <MessagingInput
+            user={user}
+            addNewMessage={handleAddNewMessage}
+          />
+        </>
+      ) : (
+        <Loader className={styles.loading} />
+      )}
     </section>
   );
 };
