@@ -1,5 +1,6 @@
 const getUrl = (rel) => {
-  return "http://localhost:3000/" + rel;
+  const base = import.meta.env.MODE === "development" ? "http://localhost:3000/" : "/";
+  return base + rel;
 };
 
 const fetch2 = async (resource, method, body) => {
