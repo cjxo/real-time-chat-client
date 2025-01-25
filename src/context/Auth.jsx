@@ -28,6 +28,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -54,6 +55,8 @@ const AuthProvider = ({ children }) => {
     };
 
     checkAuth();
+
+    return sockIoDisconnect;
   }, []);
 
   const sockIoConnect = (userId) => {
@@ -64,6 +67,11 @@ const AuthProvider = ({ children }) => {
         },
       });
       newSocket.connect();
+      newSocket.on("new online user", (userIds) => {
+        console.log("NEW: ", userIds);
+        console.log("OLD: ", onlineUsers);
+        setOnlineUsers(userIds);
+      });
       setSocket(newSocket);
     }
   };
@@ -77,10 +85,8 @@ const AuthProvider = ({ children }) => {
   const subscribeToMessage = (toUserId) => {
     if (socket?.connected) {
       socket.on("new message", (message) => {
-        //if (parseInt(message.sender_id) !== toUserId) {
-          console.log(message);
-          setMessages((prevMessage) => [...prevMessage, message]);
-        //}
+        console.log(message);
+        setMessages((prevMessage) => [...prevMessage, message]);
       });
     }
   };
@@ -130,7 +136,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoading, isAuth, user, signIn, signUp, signOut, update, socket, subscribeToMessage, unsubscribeToMessage  }}>
+    <AuthContext.Provider value={{ isLoading, isAuth, user, signIn, signUp, signOut, update, socket, subscribeToMessage, unsubscribeToMessage, onlineUsers }}>
       {children}
     </AuthContext.Provider>
   );

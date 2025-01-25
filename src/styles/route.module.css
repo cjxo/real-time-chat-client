@@ -132,18 +132,38 @@
         border: 1px solid transparent;
         padding: 8px;
         border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
         
         &, .name, .recentMessage {
           transition-timing-function: ease;
           transition-duration: 200ms;
           transition-property: border;
         }
-        
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        img {
-          width: 50px;
+         
+        .left {
+          position: relative;
+          img {
+            width: 50px;
+          }
+
+          .online, .offline {
+            position: absolute;
+            right: 0%;
+            bottom: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+          }
+
+          .online {
+            background-color: #72ed6f;
+          }
+
+          .offline {
+            background-color: #5c5c5c;
+          }
         }
         
         .name {

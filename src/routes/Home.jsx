@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/route.module.css";
 import Searchbar from "../components/Searchbar";
 import api from "../lib/api";
+import { useAuth } from "../context/Auth";
 
 const Home = () => {
   const [messages, setMessages] = useState([]);
+  const { onlineUsers } = useAuth();
   
-  useState(() => {
+  useEffect(() => {
     api.message.getAll().then(result => {
       if (result.ok) {
         setMessages(result.messages);
@@ -16,6 +18,8 @@ const Home = () => {
       }
     });
   }, []);
+
+  console.log(onlineUsers)
   
   return (
     <section className={styles.home}>
@@ -30,6 +34,9 @@ const Home = () => {
                   src="./icons/profile-circle-svgrepo-com.svg"
                   alt="profile"
                 />
+
+                <div className={onlineUsers.includes(`${message.user.id}`) ? styles.online : styles.offline}>
+                </div>
               </div>
               
               <div className={styles.right}>

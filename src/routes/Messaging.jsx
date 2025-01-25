@@ -34,7 +34,6 @@ const Messaging = () => {
   // locally only...
   const handleAddNewMessage = (message) => {
     setMessageState({ user, messages: [...messages, message] })
-    socket.emit("chat message", message);
   };
   
   return (
