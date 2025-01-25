@@ -9,25 +9,26 @@ import api from "../lib/api";
 import { useAuth } from "../context/Auth";
 
 const Messaging = () => {
-  const { id } = useParams();
   const location = useLocation();
   const [messageState, setMessageState] = useState({user: {}, messages:[]});
   const messages = messageState.messages;
   const user = messageState.user;
   const { socket, subscribeToMessage, unsubscribeToMessage } = useAuth();
+  const userId = location.state;
 
   useEffect(() => {
-    api.message.get(id).then(result => {
+    api.message.get(userId).then(result => {
       if (result.ok) {
-        setMessageState(result.theMessage[0])
-        console.log(result.theMessage[0])
-        subscribeToMessage(id);
+        console.log(result.theMessage);
+        setMessageState(result.theMessage)
+        console.log(result.theMessage)
+        subscribeToMessage(userId);
       } else {
         console.error(result.message);
       }
     });
 
-    return () => unsubscribeToMessage(id)
+    return () => unsubscribeToMessage(userId)
   }, [subscribeToMessage]);
   
   // locally only...

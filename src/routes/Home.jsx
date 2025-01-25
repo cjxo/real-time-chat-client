@@ -24,7 +24,7 @@ const Home = () => {
       <ul>
         {messages.map(message => {
           return <li key={message.user.id}>
-            <Link to={`message/${message.user.id}`}>
+            <Link to={`message/${message.user.id}`} state={message.user.id}>
               <div className={styles.left}>
                 <img
                   src="./icons/profile-circle-svgrepo-com.svg"

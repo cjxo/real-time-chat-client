@@ -77,8 +77,10 @@ const AuthProvider = ({ children }) => {
   const subscribeToMessage = (toUserId) => {
     if (socket?.connected) {
       socket.on("new message", (message) => {
-        console.log(message);
-        setMessages((prevMessage) => [...prevMessage, message]);
+        //if (parseInt(message.sender_id) !== toUserId) {
+          console.log(message);
+          setMessages((prevMessage) => [...prevMessage, message]);
+        //}
       });
     }
   };
