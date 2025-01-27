@@ -4,13 +4,15 @@ import CoolCheckbox from "./CoolCheckbox";
 import styles from "../styles/component.module.css";
 import { Button0 } from "./Button";
 import { Input0 } from "./Input";
+import { DotLoader } from "./Loader";
 import { useAuth } from "../context/Auth";
 
 const SignUp = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const auth = useAuth();
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -31,13 +33,14 @@ const SignUp = () => {
       return;
     }
     
-    auth
-      .signUp(first_name, last_name, email, password)
-      .then(result => {
-        if (!result.ok) {
-          setError(result.message);
-        }
-      });
+    setIsLoading(true);
+    auth.signUp(first_name, last_name, email, password).then(result => {
+      if (!result.ok) {
+        setError(result.message);
+      }
+      
+      setIsLoading(false);
+    });
   };
   
   return (
@@ -90,7 +93,7 @@ const SignUp = () => {
         </div>
 
         <div className={`${styles.errorMsg} ${error ? styles.visible : ""}`}>{error}</div>
-        <Button0>Submit</Button0>
+        <Button0>{isLoading ? <DotLoader label={"Please Wait"} /> : "Submit"}</Button0>
       </form>
       
       <p className={styles.epilogue}>Already have an account? <Link to="/sign-in">Sign In</Link></p>

@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import CoolCheckbox from "./CoolCheckbox";
 import styles from "../styles/component.module.css";
 import { Button0 } from "./Button";
+import { DotLoader } from "./Loader";
 import { Input0 } from "./Input";
 import { useAuth } from "../context/Auth";
 
 const SignIn = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const auth = useAuth();
 
   const handleSubmit = (e) => {
@@ -18,13 +20,14 @@ const SignIn = () => {
     const email = fd.get("email");
     const password = fd.get("password");
 
-    auth
-      .signIn(email, password)
-      .then(result => {
-        if (!result.ok) {
-          setError(result.message);
-        }
-      });
+    setIsLoading(true);
+    auth.signIn(email, password).then(result => {
+      if (!result.ok) {
+        setError(result.message);
+      }
+
+      setIsLoading(false);
+    });
   };
   
   return (
@@ -56,7 +59,7 @@ const SignIn = () => {
         </div>
 
         <div className={`${styles.errorMsg} ${error ? styles.visible : ""}`}>{error}</div>
-        <Button0>Submit</Button0>
+        <Button0>{isLoading ? <DotLoader label={"Please Wait"} /> : "Submit"}</Button0>
       </form>
       
       <p className={styles.epilogue}>Do not have an account? <Link to="/sign-up">Sign Up</Link></p>
